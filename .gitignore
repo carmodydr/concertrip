@@ -1,3 +1,4 @@
+.gitignore
 web/flask_roadtrip/secrets.py
 web/flask_roadtrip/secrets.pyc
 songs/**
