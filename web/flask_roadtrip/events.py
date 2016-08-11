@@ -174,4 +174,4 @@ def returnTopEvents(latStart, lonStart, latEnd, lonEnd, radius, startDate, endDa
 			if (j['ind'] == i):
 				j['chosen'] = 1
 	
-	return newlist
+	return fullList
