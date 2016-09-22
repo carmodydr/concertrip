@@ -9,7 +9,7 @@ from pandas import to_datetime
 from datetime import timedelta
 import networkx as nx
 
-BASEurl = 'http://api.bandsintown.com/events/search'
+BASEurl = 'http://api.bandsintown.com/events/search?api_version=2.0'
 appID = 'ConcertripRouteFinder'
 
 rank_norm = 13.2 # the average shortest path between artists, on average
@@ -67,8 +67,12 @@ def genLatLonPoints(startLat, startLon, endLat, endLon, startDate, endDate, radi
 def topEvent(lat, lon, searchDateStart, searchDateEnd, radius, seedArtist, g):
 	# For a given location, find a list of events, rank them, and return the best one
 	limit = '100'
-	url = BASEurl + '?location='+str(lat)+','+str(lon)+'&radius='+radius+'&date='+searchDateStart+','+searchDateEnd+'&per_page='+limit+'&format=json&app_id=' + appID
+	url = BASEurl + '&location='+str(lat)+','+str(lon)+'&radius='+radius+'&date='+searchDateStart+','+searchDateEnd+'&per_page='+limit+'&format=json&app_id=' + appID
+	print url
         response = requests.request( 'get', url)
+	if response == []:
+		print "No events for this location."
+		return []
         parsedResponse = response.json()
         events = []
         for i in parsedResponse:
